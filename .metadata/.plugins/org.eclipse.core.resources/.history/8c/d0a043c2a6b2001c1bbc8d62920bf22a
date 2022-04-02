@@ -1,0 +1,17 @@
+import java.awt.Color;
+
+public class Logic {
+
+	private final String player1 = "X";
+	private final String player2 = "O";
+	private String currentPlayer;
+	
+	private String[] gameInfo = {"","","","","","","","",""};;
+	
+	public Logic() {
+
+	}
+	
+	
+	
+}

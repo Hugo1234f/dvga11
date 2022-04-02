@@ -1,0 +1,24 @@
+
+public class Logic {
+
+	private final String player1 = "X";
+	private final String player2 = "O";
+	private String currentPlayer;
+	
+	private String[] gameInfo = {"","","","","","","","",""};;
+	
+	public Logic() {
+
+	}
+	
+	public boolean IsLegalMove(int i) throws IndexOutOfBoundsException{
+		if(gameInfo[i] != "") {return false;}
+		
+		return true;
+	}
+	
+	public void confirmMove(int i) throws IndexOutOfBoundsException {
+		gameInfo[i] = currentPlayer;
+	}
+	
+}

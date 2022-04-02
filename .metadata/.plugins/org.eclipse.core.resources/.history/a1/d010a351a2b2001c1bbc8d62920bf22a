@@ -1,0 +1,23 @@
+import java.awt.BorderLayout;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class GUI extends JFrame{
+	
+	JPanel top, bottom, game;
+	
+	public GUI() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setVisible(true);
+	
+		setLayout(new BorderLayout());
+		top = new JPanel();
+		top.add(new JLabel("Test"));
+		add(top);
+		
+	}
+	
+	
+}

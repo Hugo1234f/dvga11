@@ -1,0 +1,31 @@
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class GUI extends JFrame{
+	
+	JPanel top, bottom, game;
+	JButton[] btns;
+	
+	public GUI() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setVisible(true);
+		setPreferredSize(new Dimension(1280, 720));
+	
+		setLayout(new BorderLayout());
+		
+		top = new JPanel();
+		top.add(new JLabel("Test"));
+		game = new BoxLayout(3,3);
+		
+		add(top);
+		pack();
+	}
+	
+	
+}

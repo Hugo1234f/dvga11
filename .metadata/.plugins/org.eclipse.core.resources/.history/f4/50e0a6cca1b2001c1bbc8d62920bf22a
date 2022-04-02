@@ -1,0 +1,29 @@
+import java.awt.event.ActionEvent;
+
+public class App {
+
+	Logic logic;
+	GUI gui;
+	
+	public App() {
+		logic = new Logic();
+		gui = new GUI();
+		
+		loop();
+	}
+	
+	private void loop() {
+		while(true) {
+			try {
+				ActionEvent e = gui.getActionEvent();
+				if(e != null) {System.out.println("ActionEvent detected");}
+				gui.clearActionEvent();
+			} catch (Exception e) {
+				System.out.println("null");
+			}
+		}
+	}
+	
+	
+	
+}

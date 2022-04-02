@@ -1,0 +1,8 @@
+import java.awt.Color;
+
+public class Logic {
+
+	private final Color player1Color = Color.red;
+	private final Color player2Color = Color.blue;
+	
+}
