@@ -8,39 +8,54 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.EmptyBorder;
 
 public class GUI extends JFrame{
 	
 	private JPanel top, bottom, game;
 	private JButton[] btns;
-	private final Color player1Color = Color.red;
-	private final Color player2Color = Color.blue;
+	private JLabel currentPlayer;
+
 	private final Color defaultColor;
 	
 	public GUI(Color defaulColor) {
+		currentPlayer = new JLabel("Current Player: X");
+		currentPlayer.setForeground(Color.red);
+		
 		btns = new JButton[9];
 		this.defaultColor = defaulColor;
 		
 		//Set up window
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
-		setPreferredSize(new Dimension(1280, 720));
+		setPreferredSize(new Dimension(500,600));
+		setResizable(false);
 	
 		//Set up layouts
 		setLayout(new BorderLayout());
 		top = new JPanel(new FlowLayout());
 		game = new JPanel(new GridLayout(3,3));
 		bottom = new JPanel(new FlowLayout());
-		
 		//Add content to the layouts
-		top.add(new JLabel("Test"));
+		
+		JLabel player1 = new JLabel("Player: O");
+		JLabel player2 = new JLabel("Player: X");
+		player1.setForeground(Color.red);
+		player2.setForeground(Color.blue);
+		
+		
+		top.add(player1);
+		top.add(currentPlayer);
+		top.add(player2);
 		for(int i = 0; i < 9; i++) {
-			btns[i] = new JButton(Integer.toString(i));
+			btns[i] = new JButton();
 			
 			btns[i].setBackground(defaultColor);
 			btns[i].setRolloverEnabled(false);
@@ -58,7 +73,7 @@ public class GUI extends JFrame{
 	}
 	
 	//tries to read tttlogo.png and either returns it, or a error message as a JLabel
-	//getScaledInstance hämtat från:
+	//getScaledInstance taken from:
 	//	https://stackoverflow.com/questions/5895829/resizing-image-in-java
 	private JLabel getLogo() {
 		Image logo, scaledLogo;
@@ -87,6 +102,11 @@ public class GUI extends JFrame{
 			btns[i].setText("");
 			btns[i].setBackground(defaultColor);
 		}
+	}
+	
+	public void setCurrentPlayer(String player, Color color) {
+		currentPlayer.setText(player);
+		currentPlayer.setForeground(color);
 	}
 	
 	
