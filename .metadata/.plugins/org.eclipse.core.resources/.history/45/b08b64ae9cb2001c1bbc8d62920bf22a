@@ -4,8 +4,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
@@ -16,10 +14,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class GUI extends JFrame implements ActionListener {
+public class GUI extends JFrame {
 	private static final long serialVersionUID = 1085496835987043717L;
 	JPanel topBar, gameArea, bottomBar;
-	private JButton[] btns;
 	
 	public GUI() {
 		//Set up the window
@@ -35,7 +32,7 @@ public class GUI extends JFrame implements ActionListener {
 		topBar = new JPanel(new FlowLayout(FlowLayout.CENTER, 50, 10));
 		gameArea = new JPanel(new GridLayout(3,3));
 		bottomBar = new JPanel(new FlowLayout());
-		btns = new JButton[9];
+		
 		
 		//Adds content to the panels
 		topBar.add(new JLabel("Player O Score"), FlowLayout.LEFT);
@@ -43,13 +40,12 @@ public class GUI extends JFrame implements ActionListener {
 		topBar.add(new JLabel("Player X Score"), FlowLayout.RIGHT);
 		
 		for(int i = 0; i < 9; i++) {
-			btns[i] = new JButton(Integer.toString(i));
+			JButton b = new JButton(Integer.toString(i));
 			
-			btns[i].setBackground(Color.white);
-			btns[i].setRolloverEnabled(false);
-			btns[i].addActionListener(this);
+			b.setBackground(Color.white);
+			b.setRolloverEnabled(false);
 			
-			gameArea.add(btns[i]);
+			gameArea.add(b);
 		}
 		
 		bottomBar.add(getLogo());
@@ -77,15 +73,6 @@ public class GUI extends JFrame implements ActionListener {
 		scaledLogo = logo.getScaledInstance(60, 40, Image.SCALE_DEFAULT);
 		return new JLabel(new ImageIcon(scaledLogo));
 		
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		for(int i = 0; i < btns.length; i++) {
-			if(e.getSource() == btns[i]) {
-				System.out.println("Button " + (i+1) + " was pressed");
-			}
-		}
 	}
 	
 	

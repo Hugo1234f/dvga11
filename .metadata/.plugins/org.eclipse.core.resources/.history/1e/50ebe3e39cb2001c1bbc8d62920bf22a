@@ -83,7 +83,7 @@ public class GUI extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		for(int i = 0; i < btns.length; i++) {
 			if(e.getSource() == btns[i]) {
-				System.out.println("Button " + (i+1) + " was pressed");
+				System.out.println("Button " + i+1 + " was pressed");
 			}
 		}
 	}
