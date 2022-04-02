@@ -1,0 +1,16 @@
+
+public class App {
+
+	Logic logic;
+	GUI gui;
+	
+	public App() {
+		logic = new Logic();
+		gui = new GUI();
+		
+		
+	}
+	
+	
+	
+}
