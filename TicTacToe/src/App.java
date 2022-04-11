@@ -52,6 +52,7 @@ public class App implements ActionListener {
 		}
 		
 		int gameStatus = logic.getStatus();
+		System.out.println(gameStatus);
 		if(gameStatus != 0) {
 			gui.triggerWinEnd(gameStatus); 
 			logic.reset();

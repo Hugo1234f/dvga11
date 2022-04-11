@@ -34,15 +34,15 @@ public class GUI extends JFrame {
 		//Sets up window
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
-		this.setMinimumSize(new Dimension(400,400));
-		this.setSize(400, 400);
+		this.setMinimumSize(new Dimension(500,400));
+		this.setSize(500, 400);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		setTitle("TicTacToe");
 
 		//Sets up window Layouts
 		this.setLayout(new BorderLayout());
-		header = new JPanel(new FlowLayout());
+		header = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 5));
 		gameArea = new JPanel(new GridLayout(3, 3));
 		footer = new JPanel(new FlowLayout());
 		
@@ -50,15 +50,17 @@ public class GUI extends JFrame {
 		p1Label = new JLabel("Player O: " + player1Score);
 		p2Label = new JLabel("Player X: " + player2Score);
 		JLabel preCurPlayer = new JLabel("Current player: ");
+		JPanel curPlayer = new JPanel();
 		currentPlayerLabel = new JLabel(App.currentPlayer);
+		curPlayer.add(preCurPlayer);
+		curPlayer.add(currentPlayerLabel);
 		if(currentPlayerLabel.getText() == App.player1) {
 			currentPlayerLabel.setForeground(Color.red);
 		}else {
 			currentPlayerLabel.setForeground(Color.blue);
 		}
 		header.add(p1Label);
-		header.add(preCurPlayer);
-		header.add(currentPlayerLabel);
+		header.add(curPlayer);
 		header.add(p2Label);
 		p1Label.setForeground(Color.red);
 		p2Label.setForeground(Color.blue);
@@ -103,12 +105,12 @@ public class GUI extends JFrame {
 	public void triggerWinEnd(int status) {
 		if(status == 1) {
 			player1Score++;
-			p1Label.setText(Integer.toString(player1Score));
+			p1Label.setText("Player O: " + Integer.toString(player1Score));
 			JOptionPane.showMessageDialog(this, "Player O Won!");
 		}
 		if(status == 2) {
 			player2Score++;
-			p1Label.setText(Integer.toString(player2Score));
+			p2Label.setText("Player X: " + Integer.toString(player2Score));
 			JOptionPane.showMessageDialog(this, "Player X Won!");
 		}
 		if(status == 3) {
