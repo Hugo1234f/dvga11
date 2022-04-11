@@ -5,61 +5,65 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-public class App implements ActionListener{
+public class App implements ActionListener {
 
-	private Logic logic;
+	public static final String player1 = "O";
+	public static final String player2 = "X";
+	public static String currentPlayer = player1;
+	
 	private GUI gui;
-
-	private Color defaultColor = Color.white;
+	private Logic logic;
 	
 	public App() {
-		logic = new Logic(defaultColor);
-		gui = new GUI(defaultColor);
+		gui = new GUI();
+		logic = new Logic();
 		
-		//Add actionListeners to the buttons
-		for(int i= 0; i < 9; i++) {
-			JButton tmp = gui.getButton(i);
-			tmp.addActionListener(this);
-			gui.setButton(i, tmp);
+		setUpBtnConnection();
+	}
+	
+	//Adds action listeners to the gui buttons
+	private void setUpBtnConnection() {
+		for(int i = 0; i < 9; i++) {
+			JButton btn = gui.getButton(i);
+			btn.addActionListener(this);
+			gui.setButton(btn, i);
 		}
 	}
 
-	//Catches events from the GUI buttons and deals with them
+	//Manages button presses
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		for(int i = 0; i < 9; i++) {
+		for(int i = 0; i < 9; i++) {						//Finds the button that triggered the event
 			if(e.getSource() == gui.getButton(i)) {
-				if(logic.IsLegalMove(i)) {
-					logic.confirmMove(i);
-					updateBoard();
+				if(logic.IsLeagalMove(i)) {					//Checks if the move is leagal, and if so makes it.
+					JButton btn = gui.getButton(i);			
+					btn.setText(currentPlayer);
+					if(currentPlayer == player1) {
+						btn.setForeground(Color.red);
+					}else {
+						btn.setForeground(Color.blue);
+					}
+					gui.setButton(btn, i);
+					
+					logic.makeMove(i);
+					gui.switchCurrentPlayer();
 				}
 			}
 		}
 		
-	}
-	
-	//Updates the GUI using the data from logic
-	//setFont taken from:
-	// 	http://www.java2s.com/Code/JavaAPI/java.awt/newFontStringnameintstyleintsize.htm
-	private void updateBoard() {
-		for(int i = 0; i < 9; i++) {
-			JButton btn = gui.getButton(i);
-			
-			Color color = logic.getColor(i);
-			Font font = new Font("Arial", Font.BOLD, 42);
-			
-			btn.setText(logic.getInfo(i));
-			btn.setFont(font);
-			btn.setForeground(logic.getColor(i));
-			
-			
-			gui.setButton(i, btn);
-			gui.setCurrentPlayer("Current player: " + logic.getCurrentPlayer(), logic.getCurrentPlayerColor());
+		int gameStatus = logic.getStatus();
+		if(gameStatus != 0) {
+			gui.triggerWinEnd(gameStatus); 
+			logic.reset();
 		}
 	}
 	
-	
-	
-	
+	//Sets the current player
+	public void SetCurrentPlayer(String newPlayer) {
+		if(newPlayer == player1 || newPlayer == player2) {
+			currentPlayer = newPlayer;
+		}
+	}
+
 	
 }

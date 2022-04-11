@@ -1,57 +1,93 @@
-import java.awt.Color;
+
 
 public class Logic {
 
-	private final String player1 = "X";
-	private final String player2 = "O";
-	private final Color player1Color = Color.RED;
-	private final Color player2Color = Color.BLUE;
-	private final Color defaultColor;
+	private String[] gameStatus = {"","","","","","","","",""};
 	
-	private String currentPlayer;
-	
-	private String[] gameInfo = {"","","","","","","","",""};;
-	
-	public Logic(Color defaultColor) {
-		currentPlayer = player1;
-		this.defaultColor = defaultColor;
+	public Logic() {
+		
 	}
 	
-	//Checks if a move is leagal to make(i.e if the spot has not already been clicked)
-	public boolean IsLegalMove(int i) throws IndexOutOfBoundsException{
-		if(gameInfo[i] == "") {return true;}
-		
+	//Returns true if the index provided is empty, otherwise returns false
+	public boolean IsLeagalMove(int i) throws IndexOutOfBoundsException {
+		if(gameStatus[i] == "") {
+			return true;
+		}
 		return false;
 	}
 	
-	//makes a move, and switches the current player
-	public void confirmMove(int i) throws IndexOutOfBoundsException {
-		gameInfo[i] = currentPlayer;
+	
+	//Enters the current player into the index provided
+	public void makeMove(int i) throws IndexOutOfBoundsException {
+		gameStatus[i] = App.currentPlayer;
 		
-		if(currentPlayer == player1) { currentPlayer = player2;}
-		else { currentPlayer = player1;}
+		if(App.currentPlayer == App.player1) {
+			App.currentPlayer = App.player2;
+		}else {
+			App.currentPlayer = App.player1;
+		}
 	}
 	
-	//returns the status of a position in the gameArea
-	public String getInfo(int i) throws IndexOutOfBoundsException {
-		return gameInfo[i];
+	//0: not finished
+	//1: player 1 won
+	//2: player 2 won
+	//3: draw
+	public int getStatus() {
+		if(isHorizontalWin(App.player1) || isVerticalWin(App.player1) || isDiagonalWin(App.player1)) {
+			return 1;
+		}
+		if(isHorizontalWin(App.player2) || isVerticalWin(App.player2) || isDiagonalWin(App.player2)) {
+			return 2;
+		}
+		
+		if(isFull()) {return 3;}
+		
+		return 0;
 	}
 	
-	//returns the current player
-	public String getCurrentPlayer() {
-		return currentPlayer;
+	//Checks if the board is full
+	private boolean isFull() {
+		for(int i = 0; i < 9; i++) {
+			if(gameStatus[i] == "") {return false;}
+		}
+		return true;
 	}
 	
-	//returns the color of a position
-	public Color getColor(int i) {
-		if(gameInfo[i] == player1) {return player1Color;} 
-		else if(gameInfo[i] == player2) {return player2Color;}
-		else {return defaultColor;}
+	//Checks if the specified player has a horizontal victory
+	private boolean isHorizontalWin(String player) {
+		if((gameStatus[0] == player && gameStatus[1] == player && gameStatus[2] == player) ||
+			(gameStatus[3] == player && gameStatus[4] == player && gameStatus[5] == player) ||
+			(gameStatus[6] == player && gameStatus[7] == player && gameStatus[8] == player)) {
+			return true;
+		}
+			return false;
 	}
 	
-	public Color getCurrentPlayerColor() {
-		if(currentPlayer == player1) {return player1Color;} 
-		else {return player2Color;}
+	//Checks if the specified player has a vertical victory
+	private boolean isVerticalWin(String player) {
+		if((gameStatus[0] == player && gameStatus[3] == player && gameStatus[6] == player) ||
+				(gameStatus[1] == player && gameStatus[4] == player && gameStatus[7] == player) ||
+				(gameStatus[2] == player && gameStatus[5] == player && gameStatus[8] == player)) {
+			return true;
+		}
+			return false;
 	}
+	
+	//Checks if the specified player has a diagonal victory
+	private boolean isDiagonalWin(String player) {
+		if((gameStatus[0] == player && gameStatus[4] == player && gameStatus[8] == player) ||
+			(gameStatus[6] == player && gameStatus[4] == player && gameStatus[2] == player)) {
+			return true;
+		}
+			return false;
+	}
+	
+	//Clears the gameStatus array
+	public void reset() {
+		for(int i = 0; i < 9; i++) {
+			gameStatus[i] = "";
+		}
+	}
+	
 	
 }
