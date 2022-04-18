@@ -9,19 +9,17 @@ public class Table {
 		this.status = status;
 	}
 	
-	public void setId(int id) {
+	public void setId(int id) throws Exception {
 		if(id > 16 || id < 1) {
-			System.out.println("Error: argument for setID is not valid");
-			return;
+			throw new Exception("Error: argument for setID is not valid");
 		}
 		
 		this.id = id;
 	}
 	
-	public void setStatus(String status) {
+	public void setStatus(String status) throws Exception {
 		if(status != "available" || status != "occupied" || status != "reserved") {
-			System.out.println("Error: argument for setStatus is not valid");
-			return;
+			throw new Exception("Error: argument for setStatus is not valid");
 		}
 		
 		this.status = status;
