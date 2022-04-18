@@ -1,18 +1,19 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Toolkit;
 
-import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class GUIManager {
 
 	private JFrame frame;
 	private WaitingList waitingList;
-	private UtilityManager utility;
-	private JPanel waitPanel, utilityPanel, keyboardPanel, centerPanel;
+	private static JPanel waitPanel, utilityPanel, keyboardPanel, centerPanel;
+	private JLabel date, time;
 	
 	public GUIManager() {
 		frame = new JFrame();
@@ -25,11 +26,22 @@ public class GUIManager {
 		frame.setVisible(true);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
+		frame.setLayout(new BorderLayout());
 		
 		setUpLayouts();
 		
+		date = new JLabel("N/A");
+		time = new JLabel("N/A");
+		date.setForeground(Color.white);
+		time.setForeground(Color.white);
+		
+		utilityPanel.add(date);
+		utilityPanel.add(time);
+		
 		frame.add(utilityPanel, BorderLayout.NORTH);
 		frame.add(waitPanel, BorderLayout.EAST);
+		frame.add(keyboardPanel, BorderLayout.SOUTH);
+		frame.add(centerPanel, BorderLayout.CENTER);
 	}
 	
 	private void setUpLayouts() {
@@ -38,8 +50,26 @@ public class GUIManager {
 		//bot: tangentbord
 		//top: tid, datum, etc.
 		
-		utilityPanel = new JPanel(new FlowLayout());
+		utilityPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 30, 10));
+		utilityPanel.setBackground(Color.BLACK);
+		
 		waitPanel = new JPanel();
+		waitPanel.setBackground(Color.red);
+		
+		keyboardPanel = new JPanel();
+		keyboardPanel.setBackground(Color.yellow);
+		
+		centerPanel = new JPanel(new BorderLayout());
+		centerPanel.setBackground(Color.GREEN);
+		
+		
 	}
 	
+	public void setTime(String time) {
+		this.time.setText(time);
+	}
+	public void setDate(String date) {
+		this.date.setText(date);
+	}
+
 }
