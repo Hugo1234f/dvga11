@@ -75,5 +75,7 @@ public class GUIManager {
 	public void setDate(String date) {
 		this.date.setText(date);
 	}
+	
+
 
 }

@@ -1,28 +1,35 @@
+import java.awt.Color;
+import java.awt.Graphics;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Reservation extends QueueItem {
 	
 	private String name;
-	private LocalTime time;
-	private LocalDate date;
+	private String time;
+	private String date;
 	
-	public Reservation(String name, LocalTime time, LocalDate date) {
+	public Reservation(String name, String time, String date) {
+		super(name);
+		
 		this.name = name;
 		this.time = time;
 		this.date = date;
+		
+		
 	}
 	
 	public String getReservationName() {
 		return name;
 	}
 	
-	public LocalTime getReservationTime() {
+	public String getReservationTime() {
 		return time;
 	}
 	
-	public LocalDate getReservationDate() {
+	public String getReservationDate() {
 		return date;
 	}
+	
 	
 }

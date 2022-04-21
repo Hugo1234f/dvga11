@@ -19,4 +19,5 @@ public class Logic {
 		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yy");
 		return LocalDate.now().format(dateFormat);
 	}
+	
 }
