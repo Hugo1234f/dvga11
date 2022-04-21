@@ -18,6 +18,7 @@ public class QueueItem extends JPanel {
 		this.setMinimumSize(getPreferredSize());
 		this.setMaximumSize(getPreferredSize());
 		this.setPreferredSize(getPreferredSize());
+		
 	}
 	
 	public Dimension getPreferredSize() {
@@ -26,7 +27,7 @@ public class QueueItem extends JPanel {
 	
 	public void paintComponent(Graphics g) {
         super.paintComponent(g);       
-        g.drawString(ReservationName, this.getX() + 5, this.getY() + 5);
+        g.drawString(ReservationName, this.getX(), this.getY());
 
     }
 	
