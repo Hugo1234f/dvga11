@@ -12,6 +12,7 @@ class WaitingList extends Component {
 		
 		this.waitingList.add(new JLabel("Test"));
 		this.waitingList.add(new JLabel("Test 2"));
+		this.waitingList.add(new QueueItem());
 	}
 	
 }
