@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Toolkit;
 
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -38,6 +39,8 @@ public class GUIManager {
 		utilityPanel.add(date);
 		utilityPanel.add(time);
 		
+		waitingList = new WaitingList(waitPanel);
+		
 		frame.add(utilityPanel, BorderLayout.NORTH);
 		frame.add(waitPanel, BorderLayout.EAST);
 		frame.add(keyboardPanel, BorderLayout.SOUTH);
@@ -54,6 +57,7 @@ public class GUIManager {
 		utilityPanel.setBackground(Color.BLACK);
 		
 		waitPanel = new JPanel();
+		waitPanel.setLayout(new BoxLayout(waitPanel, BoxLayout.Y_AXIS));
 		waitPanel.setBackground(Color.red);
 		
 		keyboardPanel = new JPanel();

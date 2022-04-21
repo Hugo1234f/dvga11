@@ -1,5 +1,6 @@
 import java.awt.Component;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 class WaitingList extends Component {
@@ -8,6 +9,9 @@ class WaitingList extends Component {
 	
 	public WaitingList(JPanel waitingList) {
 		this.waitingList = waitingList;
+		
+		this.waitingList.add(new JLabel("Test"));
+		this.waitingList.add(new JLabel("Test 2"));
 	}
 	
 }
