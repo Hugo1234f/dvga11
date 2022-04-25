@@ -1,8 +1,11 @@
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
@@ -18,6 +21,9 @@ public class QueueItem extends JPanel {
 		this.setMinimumSize(getPreferredSize());
 		this.setMaximumSize(getPreferredSize());
 		this.setPreferredSize(getPreferredSize());
+		this.setLayout(new FlowLayout(FlowLayout.LEADING));
+		
+		this.add(new JLabel(ReservationName));
 		
 	}
 	
@@ -25,10 +31,5 @@ public class QueueItem extends JPanel {
 		return new Dimension(200,50);
 	}
 	
-	public void paintComponent(Graphics g) {
-        super.paintComponent(g);       
-        g.drawString(ReservationName, this.getX(), this.getY());
-
-    }
 	
 }

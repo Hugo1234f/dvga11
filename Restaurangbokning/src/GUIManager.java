@@ -2,9 +2,14 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -13,6 +18,7 @@ public class GUIManager {
 
 	private JFrame frame;
 	private WaitingList waitingList;
+	private MainPanel mainPanel;
 	private static JPanel waitPanel, utilityPanel, keyboardPanel, centerPanel;
 	private JLabel date, time;
 	
@@ -39,7 +45,11 @@ public class GUIManager {
 		utilityPanel.add(date);
 		utilityPanel.add(time);
 		
+		centerPanel.add(loadImage("./floorplan.png"), BorderLayout.NORTH);
+		
 		waitingList = new WaitingList(waitPanel);
+		
+		mainPanel = new MainPanel(centerPanel);
 		
 		frame.add(utilityPanel, BorderLayout.NORTH);
 		frame.add(waitPanel, BorderLayout.EAST);
@@ -64,7 +74,7 @@ public class GUIManager {
 		keyboardPanel.setBackground(Color.yellow);
 		
 		centerPanel = new JPanel(new BorderLayout());
-		centerPanel.setBackground(Color.GREEN);
+		centerPanel.setBackground(new Color(2,27,39));
 		
 		
 	}
@@ -76,6 +86,18 @@ public class GUIManager {
 		this.date.setText(date);
 	}
 	
+	private JLabel loadImage(String path) {
+		File f = new File(path);
+		
+		try {
+			Image img = ImageIO.read(f);
+			img = img.getScaledInstance(1100, 400, Image.SCALE_DEFAULT);
+			return new JLabel(new ImageIcon(img));
+		} catch (IOException e) {
+			return new JLabel("Error, could not load image");
+		}
+		
+	}
 
 
 }
