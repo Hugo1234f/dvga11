@@ -19,7 +19,7 @@ public class GUIManager {
 	private JFrame frame;
 	private WaitingList waitingList;
 	private MainPanel mainPanel;
-	private static JPanel waitPanel, utilityPanel, keyboardPanel, centerPanel;
+	private static JPanel waitPanel, utilityPanel, centerPanel;
 	private JLabel date, time;
 	
 	public GUIManager() {
@@ -53,14 +53,12 @@ public class GUIManager {
 		
 		frame.add(utilityPanel, BorderLayout.NORTH);
 		frame.add(waitPanel, BorderLayout.EAST);
-		frame.add(keyboardPanel, BorderLayout.SOUTH);
 		frame.add(centerPanel, BorderLayout.CENTER);
 	}
 	
 	private void setUpLayouts() {
 		//Center: BorderLayout(top: bild på restaurang, bot: knappar av borden)
 		//right: väntlista/reserverade bord
-		//bot: tangentbord
 		//top: tid, datum, etc.
 		
 		utilityPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 30, 10));
@@ -69,9 +67,6 @@ public class GUIManager {
 		waitPanel = new JPanel();
 		waitPanel.setLayout(new BoxLayout(waitPanel, BoxLayout.Y_AXIS));
 		waitPanel.setBackground(Color.red);
-		
-		keyboardPanel = new JPanel();
-		keyboardPanel.setBackground(Color.yellow);
 		
 		centerPanel = new JPanel(new BorderLayout());
 		centerPanel.setBackground(new Color(2,27,39));
