@@ -13,7 +13,6 @@ public class MainPanel {
 	private JPanel centerPanel, controllPanel;
 
 	private JButton[] tableButtons, tableControllButtons;
-	private int selectedBtn = 0;
 	
 	public MainPanel(JPanel centerPanel) {
 		tableButtons = new JButton[16];
@@ -81,17 +80,5 @@ public class MainPanel {
 		tableButtons[index] = btn;
 	}
 
-	//1: allocate
-	//2: deallocate
-	//3: reserve
-	//4: waitlist
-	public void selectControllButton(int button) {
-		if(button == selectedBtn) {
-			selectedBtn = 0;
-			return;
-		}
-		
-		selectedBtn = button;
-		
-	}
+	
 }
