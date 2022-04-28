@@ -56,6 +56,20 @@ public class Logic {
 		return false;
 	}
 	
+	public boolean isTableOccupied(int index) throws IndexOutOfBoundsException {
+		if(tables[index].getStatus() == "occupied") {return true;}
+		return false;
+	}
+	
+	public void setTableOccupied(int id) throws IndexOutOfBoundsException {
+		try {
+			tables[id].setStatus("occupied");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	
 	
 }

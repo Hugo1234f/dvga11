@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -23,7 +24,7 @@ public class App implements ActionListener {
 		for(int i = 0; i < 16; i++) {
 			JButton btn = gui.getButton(i);
 			btn.addActionListener(this);
-			
+			btn.setBackground(Color.green);
 			btn = logic.disableButton(btn);
 			
 			gui.setButton(i, btn);
@@ -41,37 +42,75 @@ public class App implements ActionListener {
 						gui.setButton(i, btn);
 					}
 				}
+				
+			}else if(logic.getSelectedBtn() == -2) {
+				for(int i = 0; i < 16; i++) {
+					if(logic.isTableOccupied(i)) {
+						JButton btn = gui.getButton(i);
+						btn = logic.enableButton(btn);
+						gui.setButton(i, btn);
+					}
+				}
 			}
 			else {
 				for(int i = 0; i < 16; i++) {
 					JButton btn = gui.getButton(i);
 					btn = logic.disableButton(btn);
-					gui.setButton(i, btn);
+					gui.setButton(i, btn);		
 				}
 			}
+			
 		}
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("test");
+		
+		for(int i = 0; i < 16; i++) {
+			if(e.getSource() == gui.getButton(i)) {
+				if(logic.getSelectedBtn() == -1) {
+					logic.setTableOccupied(i);
+					
+					JButton btn = gui.getButton(i);
+					btn.setBackground(Color.red);
+					gui.setButton(i, btn);
+				}
+				if(logic.getSelectedBtn() == -2) {
+					logic.setTableOccupied(i);
+					
+					JButton btn = gui.getButton(i);
+					btn.setBackground(Color.green);
+					gui.setButton(i, btn);
+				}
+				
+				logic.controllBtnPress(0);
+				System.out.println("table button " + (i+1) + " press");
+				return;
+			}
+		}
 		
 		if(e.getSource() == gui.getButton(-1)) {	//allocate button
 			logic.controllBtnPress(-1);
+			System.out.println("Allocate button press");
 			return;
 		}
 		if(e.getSource() == gui.getButton(-2)) {	//deallocate button
 			logic.controllBtnPress(-2);
+			System.out.println("Deallocate button press");
 			return;
 		}
 		if(e.getSource() == gui.getButton(-3)) {	//reserve button
 			logic.controllBtnPress(-3);
+			System.out.println("Reserve button press");
 			return;
 		}
 		if(e.getSource() == gui.getButton(-4)); {	//wait button
 			logic.controllBtnPress(-4);
+			System.out.println("Wait button press");
 			return;
 		}
+		
+		
 	}
 	
 }

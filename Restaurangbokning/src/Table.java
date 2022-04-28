@@ -18,7 +18,7 @@ public class Table {
 	}
 	
 	public void setStatus(String status) throws Exception {
-		if(status != "available" || status != "occupied" || status != "reserved") {
+		if(status != "available" && status != "occupied" && status != "reserved") {
 			throw new Exception("Error: argument for setStatus is not valid");
 		}
 		
