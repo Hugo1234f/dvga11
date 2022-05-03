@@ -51,6 +51,7 @@ public class Logic {
 		return selectedBtn;
 	}
 	
+	
 	public boolean isTableFree(int index) throws IndexOutOfBoundsException {
 		if(tables[index].getStatus() == "available") {return true;}
 		return false;

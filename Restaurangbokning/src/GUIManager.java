@@ -49,6 +49,7 @@ public class GUIManager {
 		centerPanel.add(loadImage("./floorplan.png"), BorderLayout.NORTH);
 		
 		waitingList = new WaitingList(waitPanel);
+		waitPanel.setPreferredSize(new Dimension(200, waitPanel.getHeight()));
 		
 		mainPanel = new MainPanel(centerPanel);
 		
@@ -101,6 +102,20 @@ public class GUIManager {
 	
 	public void setButton(int index, JButton btn) {
 		mainPanel.setButton(index, btn);
+	}
+	
+	public void addToWaitingList(QueueItem item) {
+		waitingList.addElementToList(item);
+	}
+	
+	public void removeFirstWaitElement() {
+		waitingList.removeFirstElement();
+	}
+	
+	public void updateWaitList() {
+		frame.remove(waitPanel);
+		waitPanel = waitingList.getPanel();
+		frame.add(waitPanel, BorderLayout.EAST);
 	}
 
 

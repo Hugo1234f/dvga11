@@ -14,10 +14,10 @@ public class App implements ActionListener {
 		logic = new Logic();
 		
 		//add actionlistener for the controll buttons
-		for(int i = 0; i < 4; i++) {
-			JButton btn = gui.getButton(i-4);
+		for(int i = 0; i < 5; i++) {
+			JButton btn = gui.getButton(i-5);
 			btn.addActionListener(this);
-			gui.setButton(i-4, btn);
+			gui.setButton(i-5, btn);
 		}
 		
 		//add actionlistener for the table buttons
@@ -34,6 +34,7 @@ public class App implements ActionListener {
 		while(true) {
 			gui.setDate(logic.getDate());
 			gui.setTime(logic.getTime());
+			
 			
 			if(logic.getSelectedBtn() == -1) {
 				for(int i = 0; i < 16; i++) {
@@ -55,9 +56,13 @@ public class App implements ActionListener {
 			}else if(logic.getSelectedBtn() == -3) {
 				
 			}else if(logic.getSelectedBtn() == -4) {
-				
+				gui.addToWaitingList(new QueueItem("Test"));
+				gui.updateWaitList();
+				logic.controllBtnPress(0);
 			}else if(logic.getSelectedBtn() == -5) {
-				
+				gui.removeFirstWaitElement();
+				gui.updateWaitList();
+				logic.controllBtnPress(0);
 			}
 			else {
 				for(int i = 0; i < 16; i++) {
@@ -93,7 +98,7 @@ public class App implements ActionListener {
 					
 				}
 				if(logic.getSelectedBtn() == -4) {		//add to wait list
-					
+
 				}
 				if(logic.getSelectedBtn() == -5) {		//remove from wait list
 					
@@ -120,9 +125,14 @@ public class App implements ActionListener {
 			System.out.println("Reserve button press");
 			return;
 		}
-		if(e.getSource() == gui.getButton(-4)); {	//wait button
+		if(e.getSource() == gui.getButton(-4)) {	//add wait button
 			logic.controllBtnPress(-4);
-			System.out.println("Wait button press");
+			System.out.println("add queue button press");
+			return;
+		}
+		if(e.getSource() == gui.getButton(-5)) {	//remove wait button
+			logic.controllBtnPress(-5);
+			System.out.println("Remove queue button press");
 			return;
 		}
 		

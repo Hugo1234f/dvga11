@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 public class QueueItem extends JPanel {
 
 	private String ReservationName;
+	private boolean clickable = true;;
 	
 	public QueueItem(String ReservationName) {
 		this.ReservationName = ReservationName;
@@ -29,6 +30,14 @@ public class QueueItem extends JPanel {
 	
 	public Dimension getPreferredSize() {
 		return new Dimension(200,50);
+	}
+	
+	public boolean isClickable() {
+		return clickable;
+	}
+	
+	public void setClickable(boolean state) {
+		clickable = state;
 	}
 	
 	

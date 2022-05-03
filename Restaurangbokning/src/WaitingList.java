@@ -1,23 +1,51 @@
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
+import java.util.ArrayList;
 
-import javax.swing.JLabel;
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 class WaitingList extends Component {
 
 	private JPanel waitingList;
+	private ArrayList<QueueItem> waitList;
 	
 	public WaitingList(JPanel waitingList) {
 		this.waitingList = waitingList;
+		waitList = new ArrayList<>();
 		
-		this.waitingList.add(new QueueItem("Adam"));
-		this.waitingList.add(new QueueItem("Bertil"));
-		this.waitingList.add(new Reservation("Cesar", "", ""));
-
+		QueueItem startItem = new QueueItem("");
+		startItem.setClickable(false);
 	}
 	
-	public void addElementToList(JPanel newItem) {
-		waitingList.add(newItem);
+	public void addElementToList(QueueItem newItem) {
+		waitList.add(newItem);
+		System.out.println("Queue item added");
+	}
+	
+	public void removeFirstElement() {
+		if(waitList.size() > 0) {
+			waitList.remove(0);
+			System.out.println("Queue item removed");
+			return;
+		}
+		System.out.println("Error: waitList is empty");
+	}
+	
+	public JPanel getPanel() {
+		int height = waitingList.getHeight();
+		
+		waitingList = new JPanel();
+		waitingList.setLayout(new BoxLayout(waitingList, BoxLayout.Y_AXIS));
+		waitingList.setPreferredSize(new Dimension(200, height));
+		waitingList.setBackground(Color.red);
+		
+		for(int i = 0; i < waitList.size(); i++) {
+			waitingList.add(waitList.get(i));
+		}
+		
+		return waitingList;
 	}
 
 	
