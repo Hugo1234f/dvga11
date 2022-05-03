@@ -30,6 +30,7 @@ public class App implements ActionListener {
 			gui.setButton(i, btn);
 		}
 		
+		//game loop
 		while(true) {
 			gui.setDate(logic.getDate());
 			gui.setTime(logic.getTime());
@@ -51,6 +52,12 @@ public class App implements ActionListener {
 						gui.setButton(i, btn);
 					}
 				}
+			}else if(logic.getSelectedBtn() == -3) {
+				
+			}else if(logic.getSelectedBtn() == -4) {
+				
+			}else if(logic.getSelectedBtn() == -5) {
+				
 			}
 			else {
 				for(int i = 0; i < 16; i++) {
@@ -68,19 +75,28 @@ public class App implements ActionListener {
 		
 		for(int i = 0; i < 16; i++) {
 			if(e.getSource() == gui.getButton(i)) {
-				if(logic.getSelectedBtn() == -1) {
+				if(logic.getSelectedBtn() == -1) {		//allocate
 					logic.setTableOccupied(i);
 					
 					JButton btn = gui.getButton(i);
 					btn.setBackground(Color.red);
 					gui.setButton(i, btn);
 				}
-				if(logic.getSelectedBtn() == -2) {
-					logic.setTableOccupied(i);
+				if(logic.getSelectedBtn() == -2) {		//de-allocate
+					logic.setTableAvailable(i);
 					
 					JButton btn = gui.getButton(i);
 					btn.setBackground(Color.green);
 					gui.setButton(i, btn);
+				}
+				if(logic.getSelectedBtn() == -3) { 		//reserve
+					
+				}
+				if(logic.getSelectedBtn() == -4) {		//add to wait list
+					
+				}
+				if(logic.getSelectedBtn() == -5) {		//remove from wait list
+					
 				}
 				
 				logic.controllBtnPress(0);

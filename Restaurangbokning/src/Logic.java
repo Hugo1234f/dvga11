@@ -70,6 +70,15 @@ public class Logic {
 		}
 	}
 	
+	public void setTableAvailable(int id) throws IndexOutOfBoundsException {
+		try {
+			tables[id].setStatus("available");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	
 	
 }
