@@ -2,6 +2,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -13,6 +15,7 @@ import javax.swing.JPanel;
 public class QueueItem extends JPanel {
 
 	private String ReservationName;
+	private String persons;
 	private boolean clickable = true;;
 	
 	public QueueItem(String ReservationName) {
@@ -43,6 +46,15 @@ public class QueueItem extends JPanel {
 	public void setClickable(boolean state) {
 		clickable = state;
 	}
+	
+	public void setPersons(String persons) {
+		this.persons = persons;
+	}
+	
+	public String getPersons() {
+		return this.persons;
+	}
+
 	
 	
 }

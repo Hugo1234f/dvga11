@@ -1,11 +1,13 @@
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
-public class App implements ActionListener {
+public class App implements ActionListener, MouseListener {
 
 	private GUIManager gui;
 	private Logic logic;
@@ -56,25 +58,28 @@ public class App implements ActionListener {
 				}
 			}else if(logic.getSelectedBtn() == -3) {
 				
-			}else if(logic.getSelectedBtn() == -4) {
+			}else if(logic.getSelectedBtn() == -4) {	//Add to waiting List
 				String name;
+				QueueItem item = new QueueItem("");
+				String number;
+				
 				while(true) {
 					name = JOptionPane.showInputDialog("Namn of group...");
-					if(name != null) {
-						if(name.length() < 1) {break;}
-						gui.addToWaitingList(new QueueItem(name));
-						gui.updateWaitList();
-						logic.controllBtnPress(0);
-						System.out.println("Added queue item");
-						break;
-					}else {
+					if(name == null) {
 						logic.controllBtnPress(0); 
 						System.out.println("Pane canceled");
 						break;
+					}else {
+						if(name.length() < 1) {System.out.println("Error creating queueItem: item must have a name"); break;}
+						break;
 					}
-					
 				}
 				
+				item.setName(name); System.out.println(name);
+				//item.setPersons(number); System.out.println(number);
+				item.addMouseListener(this);
+				gui.addToWaitingList(new QueueItem(name));
+				//logic.controllBtnPress(0);
 				
 			}else if(logic.getSelectedBtn() == -5) {
 				
@@ -151,6 +156,36 @@ public class App implements ActionListener {
 			return;
 		}
 		
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 	
