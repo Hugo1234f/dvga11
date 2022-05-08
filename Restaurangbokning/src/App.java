@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 public class App implements ActionListener {
 
@@ -24,7 +25,7 @@ public class App implements ActionListener {
 		for(int i = 0; i < 16; i++) {
 			JButton btn = gui.getButton(i);
 			btn.addActionListener(this);
-			btn.setBackground(Color.green);
+			btn.setBackground(Color.decode("#48A14D"));
 			btn = logic.disableButton(btn);
 			
 			gui.setButton(i, btn);
@@ -56,13 +57,27 @@ public class App implements ActionListener {
 			}else if(logic.getSelectedBtn() == -3) {
 				
 			}else if(logic.getSelectedBtn() == -4) {
-				gui.addToWaitingList(new QueueItem("Test"));
-				gui.updateWaitList();
-				logic.controllBtnPress(0);
+				String name;
+				while(true) {
+					name = JOptionPane.showInputDialog("Namn of group...");
+					if(name != null) {
+						if(name.length() < 1) {break;}
+						gui.addToWaitingList(new QueueItem(name));
+						gui.updateWaitList();
+						logic.controllBtnPress(0);
+						System.out.println("Added queue item");
+						break;
+					}else {
+						logic.controllBtnPress(0); 
+						System.out.println("Pane canceled");
+						break;
+					}
+					
+				}
+				
+				
 			}else if(logic.getSelectedBtn() == -5) {
-				gui.removeFirstWaitElement();
-				gui.updateWaitList();
-				logic.controllBtnPress(0);
+				
 			}
 			else {
 				for(int i = 0; i < 16; i++) {

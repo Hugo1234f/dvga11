@@ -39,7 +39,7 @@ class WaitingList extends Component {
 		waitingList = new JPanel();
 		waitingList.setLayout(new BoxLayout(waitingList, BoxLayout.Y_AXIS));
 		waitingList.setPreferredSize(new Dimension(200, height));
-		waitingList.setBackground(Color.red);
+		waitingList.setBackground(Color.decode("#990059"));
 		
 		for(int i = 0; i < waitList.size(); i++) {
 			waitingList.add(waitList.get(i));
@@ -47,6 +47,11 @@ class WaitingList extends Component {
 		
 		return waitingList;
 	}
+	
+	public int getLenght() {
+		return waitList.size();
+	}
+	
 
 	
 }

@@ -28,6 +28,10 @@ public class QueueItem extends JPanel {
 		
 	}
 	
+	public String getReservationName() {
+		return ReservationName;
+	}
+	
 	public Dimension getPreferredSize() {
 		return new Dimension(200,50);
 	}

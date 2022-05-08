@@ -2,6 +2,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
@@ -27,8 +28,10 @@ public class MainPanel {
 		
 		controllBtnsPanel.setBackground(new Color(2,27,39));
 		
+		Font f = new Font("SansSerif", Font.BOLD, 24);
 		for(int i = 0; i < tableButtons.length; i++) {
 			tableButtons[i] = new JButton(Integer.toString(i+1));
+			tableButtons[i].setFont(f);
 			tablesPanel.add(tableButtons[i]);
 		}
 		
@@ -38,7 +41,7 @@ public class MainPanel {
 		tableControllButtons[3] = new JButton("add to wait list");
 		tableControllButtons[4] = new JButton("remove from wait list");
 		
-		tableControllButtons[0].setBackground(Color.green);
+		tableControllButtons[0].setBackground(Color.decode("#48A14D"));
 		tableControllButtons[1].setBackground(Color.red);
 		tableControllButtons[2].setBackground(Color.yellow);
 		

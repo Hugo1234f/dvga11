@@ -68,7 +68,7 @@ public class GUIManager {
 		
 		waitPanel = new JPanel();
 		waitPanel.setLayout(new BoxLayout(waitPanel, BoxLayout.Y_AXIS));
-		waitPanel.setBackground(Color.red);
+		waitPanel.setBackground(Color.decode("#990059"));
 		
 		centerPanel = new JPanel(new BorderLayout());
 		centerPanel.setBackground(new Color(2,27,39));
@@ -117,6 +117,11 @@ public class GUIManager {
 		waitPanel = waitingList.getPanel();
 		frame.add(waitPanel, BorderLayout.EAST);
 	}
+	
+	public int getWaitSize() {
+		return waitingList.getLenght();
+	}
+	
 
 
 }
