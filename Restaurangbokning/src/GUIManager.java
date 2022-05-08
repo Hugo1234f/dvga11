@@ -122,6 +122,26 @@ public class GUIManager {
 		return waitingList.getLenght();
 	}
 	
+	public QueueItem getLastItem() {
+		return waitingList.getLast();
+	}
+	
+	public void setLastItem(QueueItem item) {
+		waitingList.setLast(item);
+	}
+	
+	public Color getColor(int index) {
+		return waitingList.getColor(index);
+	}
+	
+	public int getListSize() {
+		return waitingList.getLenght();
+	}
+	
+	public void removeElement(int index) {
+		waitingList.removeItem(index);
+	}
+	
 
 
 }

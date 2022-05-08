@@ -18,16 +18,19 @@ public class QueueItem extends JPanel {
 	private String persons;
 	private boolean clickable = true;;
 	
-	public QueueItem(String ReservationName) {
+	public QueueItem(String ReservationName, String persons) {
 		this.ReservationName = ReservationName;
+		this.persons = persons;
 		
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		this.setMinimumSize(getPreferredSize());
 		this.setMaximumSize(getPreferredSize());
 		this.setPreferredSize(getPreferredSize());
 		this.setLayout(new FlowLayout(FlowLayout.LEADING));
+		this.setBackground(Color.white);
 		
 		this.add(new JLabel(ReservationName));
+		this.add(new JLabel("(" + this.persons + ")"));
 		
 	}
 	

@@ -15,7 +15,7 @@ class WaitingList extends Component {
 		this.waitingList = waitingList;
 		waitList = new ArrayList<>();
 		
-		QueueItem startItem = new QueueItem("");
+		QueueItem startItem = new QueueItem("","");
 		startItem.setClickable(false);
 	}
 	
@@ -52,6 +52,21 @@ class WaitingList extends Component {
 		return waitList.size();
 	}
 	
+	public QueueItem getLast() {
+		return waitList.get(waitList.size()-1);
+	}
+	
+	public void setLast(QueueItem item) throws IndexOutOfBoundsException {
+		waitList.set(waitList.size()-1, item);
+	}
+	
+	public Color getColor(int index) throws IndexOutOfBoundsException {
+		return waitList.get(index).getBackground();
+	}
+	
+	public void removeItem(int index) {
+		waitList.remove(index);
+	}
 
 	
 }

@@ -59,9 +59,9 @@ public class App implements ActionListener, MouseListener {
 			}else if(logic.getSelectedBtn() == -3) {
 				
 			}else if(logic.getSelectedBtn() == -4) {	//Add to waiting List
-				String name;
-				QueueItem item = new QueueItem("");
-				String number;
+				String name = "";
+				String number = "";
+				int num = 0;
 				
 				while(true) {
 					name = JOptionPane.showInputDialog("Namn of group...");
@@ -69,20 +69,57 @@ public class App implements ActionListener, MouseListener {
 						logic.controllBtnPress(0); 
 						System.out.println("Pane canceled");
 						break;
+					}else if(name.length() == 0) {
+						System.out.println("Error: name must have lenght");
 					}else {
 						if(name.length() < 1) {System.out.println("Error creating queueItem: item must have a name"); break;}
 						break;
 					}
 				}
+				while(true) {
+					number = JOptionPane.showInputDialog("Storlek på sällskapet...");
+					if(number == null) {
+						logic.controllBtnPress(0); 
+						System.out.println("Pane canceled");
+						break;
+					}else if(number.length() == 0) {
+						System.out.println("Error: Size must exist");
+					}else {
+						if(number.length() < 1) {System.out.println("Error creating queueItem: item must have a size"); break;}
+						
+						try {
+							num = Integer.parseInt(number);
+							break;
+						}catch(Exception e) {
+							
+						}
+					}
+				}
 				
-				item.setName(name); System.out.println(name);
-				//item.setPersons(number); System.out.println(number);
+				if(name == null || number == null) {break;}
+				
+				gui.addToWaitingList(new QueueItem(name, number));
+				gui.updateWaitList();
+				QueueItem item = gui.getLastItem();
 				item.addMouseListener(this);
-				gui.addToWaitingList(new QueueItem(name));
-				//logic.controllBtnPress(0);
+				gui.setLastItem(item);
+				
+				logic.controllBtnPress(0);
 				
 			}else if(logic.getSelectedBtn() == -5) {
-				
+				int choice = JOptionPane.showConfirmDialog(null,"Är du säker på att du vill ta bort alla markerade köplatser?");
+				if(choice == JOptionPane.YES_OPTION) {
+					int len = gui.getListSize();
+					for(int i = 0; i < len; i++) {
+						if(gui.getColor(i) == Color.LIGHT_GRAY) {
+							gui.removeElement(i);
+							i--;
+							len = gui.getListSize();
+							gui.updateWaitList();
+						}
+					}
+				}
+				logic.controllBtnPress(0);
 			}
 			else {
 				for(int i = 0; i < 16; i++) {
@@ -162,7 +199,13 @@ public class App implements ActionListener, MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+		QueueItem item = (QueueItem) e.getComponent();
+		System.out.println(item.getBackground().toString());
+		if(item.getBackground() == Color.white) {
+			item.setBackground(Color.lightGray);
+		}else {
+			item.setBackground(Color.white);
+		}
 	}
 
 	@Override
