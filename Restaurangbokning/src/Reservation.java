@@ -10,7 +10,7 @@ public class Reservation extends QueueItem {
 	private String date;
 	
 	public Reservation(String name, String time, String date) {
-		super(name);
+		super(name, "");
 		
 		this.name = name;
 		this.time = time;

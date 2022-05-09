@@ -69,11 +69,11 @@ public class MainPanel {
 	//-3: reserve btn
 	//-4: add wait list btn
 	public JButton getButton(int index) throws IndexOutOfBoundsException {
-		if(index == -1) {return tableControllButtons[0];}
-		if(index == -2) {return tableControllButtons[1];}
-		if(index == -3) {return tableControllButtons[2];}
-		if(index == -4) {return tableControllButtons[3];}
-		if(index == -5) {return tableControllButtons[4];}
+		if(index == App.ALLOCATE_BUTTON) {return tableControllButtons[0];}
+		if(index == App.DEALLOCATE_BUTTON) {return tableControllButtons[1];}
+		if(index == App.RESERVE_BUTTON) {return tableControllButtons[2];}
+		if(index == App.WAITLIST_ADD_BUTTON) {return tableControllButtons[3];}
+		if(index == App.WAITLIST_REMOVE_BUTTON) {return tableControllButtons[4];}
 		
 		return tableButtons[index];
 		
