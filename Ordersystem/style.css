@@ -1,0 +1,20 @@
+.ingr {
+    font-size: small;
+}
+
+main {
+    background-color: #F9F3EE;
+}
+
+.itm {
+    border: 1px solid black;
+    margin: 0.5rem;
+    padding: 0.2rem 0rem 0.1rem 1rem;
+    background-color: #F9EBC8;
+}
+
+nav {
+    width: 100%;
+    background-color: orange;
+    padding: 1.5rem;
+}

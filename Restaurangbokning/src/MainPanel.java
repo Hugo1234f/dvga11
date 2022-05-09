@@ -42,7 +42,7 @@ public class MainPanel {
 		tableControllButtons[4] = new JButton("remove from wait list");
 		
 		tableControllButtons[0].setBackground(Color.decode("#48A14D"));
-		tableControllButtons[1].setBackground(Color.red);
+		tableControllButtons[1].setBackground(Color.decode("#cc79a7"));
 		tableControllButtons[2].setBackground(Color.yellow);
 		
 		controllBtnsPanel.add(tableControllButtons[0]);

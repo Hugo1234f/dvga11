@@ -153,7 +153,7 @@ public class App implements ActionListener, MouseListener {
 					logic.setTableOccupied(i);
 					
 					JButton btn = gui.getButton(i);
-					btn.setBackground(Color.red);
+					btn.setBackground(Color.decode("#cc79a7"));
 					gui.setButton(i, btn);
 				}
 				
