@@ -1,6 +1,9 @@
 
 $(document).ready(() => {
-    console.log(menu);
+    readMenu();
+});
+
+function readMenu() {
     let meny = document.createElement("ul");
     meny.id = "menu";
     $("main").append(meny);
@@ -23,7 +26,7 @@ $(document).ready(() => {
             let ingredientList = document.createElement("ul");
             itemLink.classList.add("itm");
             ingredientList.classList.add("ingList");
-            itemLink.innerText = itemPath[item]["name"];
+            itemLink.innerText = itemPath[item]["name"] + ' (' + itemPath[item]["price"] + ":-)";
 
             itemList.append(itemLink);
             itemLink.append(ingredientList);
@@ -51,5 +54,5 @@ $(document).ready(() => {
         }
     }
     
-    
-});
+   
+}

@@ -31,22 +31,22 @@ menu = {
 		{"name": "Mesopotamia", "contents": ["Ost", "Salami", "Köttfärs", "a:Nötter" ], "price": 75 }
 	],
 	"Såser": [
-		{"name": "Bearnaisesås 10 cl ", "price:":  10 },
-		{"name": "Kebabsås mild 10 cl ", "price:":  10 },
-		{"name": "Kebabsås stark 10 cl ", "price:":  10 },
-		{"name": "Kebabsås blandad 10 cl ", "price:":  10 },
-		{"name": "Tzatzikisås 10 cl ", "price:":  10 },
-		{"name": "Vitlökssås 10 cl ", "price:":  10}
+		{"name": "Bearnaisesås 10 cl ", "price":  10 },
+		{"name": "Kebabsås mild 10 cl ", "price":  10 },
+		{"name": "Kebabsås stark 10 cl ", "price":  10 },
+		{"name": "Kebabsås blandad 10 cl ", "price":  10 },
+		{"name": "Tzatzikisås 10 cl ", "price":  10 },
+		{"name": "Vitlökssås 10 cl ", "price":  10}
 	],
 	"Dryck": [
-		{"name": "Coca-Cola 33 cl ", "price:":  15 },
-		{"name": "Coca-Cola light 33 cl ", "price:":  15 },
-		{"name": "Fanta 33 cl ", "price:":  15  },
-		{"name": "Sprite 33 cl ", "price:":  15 },
-		{"name": "Mineralvatten 33 cl ", "price:":  15 },
-		{"name": "Lättöl 33 cl ", "price:":  15 },
-		{"name": "Coca-Cola 50 cl ", "price:":  20 },
-		{"name": "Fanta 50 cl ", "price:":  20 }
+		{"name": "Coca-Cola 33 cl ", "price":  15 },
+		{"name": "Coca-Cola light 33 cl ", "price":  15 },
+		{"name": "Fanta 33 cl ", "price":  15  },
+		{"name": "Sprite 33 cl ", "price":  15 },
+		{"name": "Mineralvatten 33 cl ", "price":  15 },
+		{"name": "Lättöl 33 cl ", "price":  15 },
+		{"name": "Coca-Cola 50 cl ", "price":  20 },
+		{"name": "Fanta 50 cl ", "price":  20 }
 	]
 }
 
