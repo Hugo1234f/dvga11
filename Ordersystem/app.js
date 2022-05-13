@@ -1,7 +1,19 @@
 
 $(document).ready(() => {
     readMenu();
+    addItemListeners();
 });
+
+function addItemListeners() {
+    let items = document.getElementsByClassName("itm");
+    for(let i = 0; i < items.length; i++) {
+        items[i].addEventListener("click", onItemClick(items[i].getAttribute("name")));
+    }
+}
+
+function onItemClick(itemName) {
+    console.log(itemName);
+}
 
 function readMenu() {
     let meny = document.createElement("ul");
@@ -24,7 +36,9 @@ function readMenu() {
         for(item in itemPath) {
             let itemLink = document.createElement("h4");
             let ingredientList = document.createElement("ul");
+            
             itemLink.classList.add("itm");
+            itemLink.setAttribute("name", itemPath[item]["name"]);
             ingredientList.classList.add("ingList");
             itemLink.innerText = itemPath[item]["name"] + ' (' + itemPath[item]["price"] + ":-)";
 
