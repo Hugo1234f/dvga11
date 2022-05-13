@@ -1,18 +1,29 @@
 
 $(document).ready(() => {
     readMenu();
-    addItemListeners();
-});
+    $("aside").addClass("d-none");
 
-function addItemListeners() {
     let items = document.getElementsByClassName("itm");
     for(let i = 0; i < items.length; i++) {
-        items[i].addEventListener("click", onItemClick(items[i].getAttribute("name")));
+        items[i].addEventListener("click", () => {
+            itemClicked(items[i]);
+        });
     }
-}
+});
 
-function onItemClick(itemName) {
-    console.log(itemName);
+
+function itemClicked(item) {
+    $("aside").empty();
+    console.log(item.getAttribute("name"));
+
+    let nameRef = document.createElement("h1");
+    nameRef.innerText = item.getAttribute("name");
+    $("aside").append(nameRef);
+
+    $("main").addClass("d-none");
+    $("aside").removeClass("d-none");
+
+
 }
 
 function readMenu() {
