@@ -17,13 +17,34 @@ function itemClicked(item) {
     console.log(item.getAttribute("name"));
 
     let nameRef = document.createElement("h1");
+    let picRef = document.createElement("img");
+    
+
     nameRef.innerText = item.getAttribute("name");
+    picRef.alt = "Bild på vald produkt";
+    picRef.style["border"] = "1px solid black";
+
+
+    $("aside").append(picRef);
     $("aside").append(nameRef);
 
     $("main").addClass("d-none");
     $("aside").removeClass("d-none");
 
+    let returnBtn = document.createElement("button");
+    returnBtn.setAttribute("type", "button");
+    $(returnBtn).addClass("btn");
+    returnBtn.setAttribute("id", "returnBtn");
+    returnBtn.innerText = "Tillbaka";
+    returnBtn.style["backgroundColor"] = "white";
 
+    $("nav").append(returnBtn);
+
+    returnBtn.addEventListener("click", () => {
+        $("aside").addClass("d-none");
+        $("main").removeClass("d-none");
+        $(returnBtn).remove();
+    });
 }
 
 function readMenu() {
