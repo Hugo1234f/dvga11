@@ -33,7 +33,7 @@ let tableCheck = {
     "15" : {price: [], item: []},
 }
 let currentTable = "1";
-let showReciet = false;
+let showReciet = true;
 
 $(document).ready(() => {
     readMenu();
@@ -56,26 +56,35 @@ $(document).ready(() => {
 
     let recietContent = "";
     
+    let changeBtn = document.createElement("button");
+    let commitBtn = document.createElement("button");
 
     $("footer").append(recietDiv);
     $("footer").click(() => {
 
+        if(showReciet) {
+            $(changeBtn).text("Visa order");
+            $(commitBtn).text("skicka till kassa");
+        }else {
+            $(changeBtn).text("Visa kvitto");
+            $(commitBtn).text("skicka till kök");
+        }
+
         if(!$("footer").hasClass("activated")) {
             if(showReciet) {
-
+                recietContent = "";
+                for(let i = 0; i < tableCheck[currentTable]["item"].length; i++) {
+                    recietContent += "<p>" + tableCheck[currentTable]["item"][i] + " (" + tableCheck[currentTable]["price"][i] + ")</p>";
+                }
             } else {
                 recietContent = "";
                 for(let i = 0; i < tableOrders[currentTable]["item"].length; i++) {
                     recietContent += "<p>" + tableOrders[currentTable]["item"][i] + " (" + tableOrders[currentTable]["price"][i] + ")</p>";
                 }
-                console.log(recietContent);
             }
             $(recietDiv).empty();
             $(recietDiv).append(recietContent);
         }
-        
-
-        
 
         if($("footer").hasClass("activated")) {
             for(let i = 0; i < 500; i++) {
@@ -89,8 +98,66 @@ $(document).ready(() => {
             $("footer").addClass("activated");    
         }
         
+
         
     });
+
+
+    $(changeBtn).css("background-color", "aqua");
+    $(changeBtn).css("margin-left", "5%");
+    $(changeBtn).css("width", "9rem");  
+    $(changeBtn).css("height", "2rem");
+    $(changeBtn).css("float", "left");
+
+    $(commitBtn).css("background-color", "cyan");
+    $(commitBtn).css("margin-left", "14%");
+    $(commitBtn).css("width", "9rem");
+    $(commitBtn).css("height", "2rem");
+
+    changeBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if(showReciet) {
+            showReciet = false;
+        }else {
+            showReciet = true;
+        }
+
+        if(showReciet) {
+            $(changeBtn).text("Visa order");
+            $(commitBtn).text("skicka till kassa");
+        }else {
+            $(changeBtn).text("Visa kvitto");
+            $(commitBtn).text("skicka till kök");
+        }
+
+        
+            if(showReciet) {
+                recietContent = "";
+                for(let i = 0; i < tableCheck[currentTable]["item"].length; i++) {
+                    recietContent += "<p>" + tableCheck[currentTable]["item"][i] + " (" + tableCheck[currentTable]["price"][i] + ")</p>";
+                }
+            } else {
+                recietContent = "";
+                for(let i = 0; i < tableOrders[currentTable]["item"].length; i++) {
+                    recietContent += "<p>" + tableOrders[currentTable]["item"][i] + " (" + tableOrders[currentTable]["price"][i] + ")</p>";
+                }
+            }
+            $(recietDiv).empty();
+            $(recietDiv).append(recietContent);
+        
+    });
+    
+    if(showReciet) {
+        $(changeBtn).text("Visa order");
+        $(commitBtn).text("skicka till kassa");
+    }else {
+        $(changeBtn).text("Visa kvitto");
+        $(commitBtn).text("skicka till kök");
+    }
+
+    $("footer").append(changeBtn);
+    $("footer").append(commitBtn);
+
 });
 
 
