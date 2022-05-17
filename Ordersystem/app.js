@@ -46,6 +46,20 @@ $(document).ready(() => {
         });
     }
 
+    //lisenserad från flaticon.com
+    let tableIcon = document.createElement("img");
+    $(tableIcon).attr("src", "./side-table.png");
+    $(tableIcon).attr("alt", "bild på bord");
+    $(tableIcon).css("float", "right");
+    $(tableIcon).css("height", "auto");
+    $(tableIcon).css("width", "3rem");
+    $(tableIcon).css("margin-right", "0.5rem");
+    $("nav").append(tableIcon);
+
+    tableIcon.addEventListener("click", ()=> {
+        console.log("change table clicked");
+    });
+
     let recietDiv = document.createElement("div");
     $(recietDiv).attr("id", "recietDiv");
     $(recietDiv).css("background-color", "white");
