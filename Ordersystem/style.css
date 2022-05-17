@@ -16,7 +16,7 @@
 nav {
     width: 100%;
     background-color: orange;
-    height: 5rem;
+    height: 3rem;
     margin-bottom: 1rem;
     position: fixed;
 }
@@ -28,14 +28,18 @@ main {
 
 aside {
     width: 0%;
+    text-align: center;
+    padding-top: 6rem;
 }
 
 aside h1 {
-    padding: 0 50%;
+    display: block;
+    white-space: nowrap;
 }
 
+
 #returnBtn {
-    margin: 1.25rem 1.5rem;
+    margin: 0.3rem 0.5rem;
 }
 
 footer {
@@ -45,7 +49,6 @@ footer {
     position: fixed;
     display: flex;
     justify-content: center;
-    margin-top: 5rem;
     
     /*hämtat från: https://www.w3schools.com/howto/howto_css_fixed_footer.asp*/
     left: 0;
@@ -53,7 +56,7 @@ footer {
     
 }
 
-footer div {
+#foot {
     margin: 0 auto;
     width: 30%;
     margin-top: -2.0rem;
@@ -66,4 +69,8 @@ footer div {
 }
 .menu {
     padding-bottom: 5rem;
+}
+
+aside h1 {
+    font-size:xx-large;
 }

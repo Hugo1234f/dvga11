@@ -1,3 +1,39 @@
+let tableOrders = {
+    "1" : {price: [], item: []},
+    "2" : {price: [], item: []},
+    "3" : {price: [], item: []},
+    "4" : {price: [], item: []},
+    "5" : {price: [], item: []},
+    "6" : {price: [], item: []},
+    "7" : {price: [], item: []},
+    "8" : {price: [], item: []},
+    "9" : {price: [], item: []},
+    "10" : {price: [], item: []},
+    "11" : {price: [], item: []},
+    "12" : {price: [], item: []},
+    "13" : {price: [], item: []},
+    "14" : {price: [], item: []},
+    "15" : {price: [], item: []},
+}
+let tableCheck = {
+    "1" : {price: [], item: []},
+    "2" : {price: [], item: []},
+    "3" : {price: [], item: []},
+    "4" : {price: [], item: []},
+    "5" : {price: [], item: []},
+    "6" : {price: [], item: []},
+    "7" : {price: [], item: []},
+    "8" : {price: [], item: []},
+    "9" : {price: [], item: []},
+    "10" : {price: [], item: []},
+    "11" : {price: [], item: []},
+    "12" : {price: [], item: []},
+    "13" : {price: [], item: []},
+    "14" : {price: [], item: []},
+    "15" : {price: [], item: []},
+}
+let currentTable = "1";
+let showReciet = false;
 
 $(document).ready(() => {
     readMenu();
@@ -9,6 +45,52 @@ $(document).ready(() => {
             itemClicked(items[i]);
         });
     }
+
+    let recietDiv = document.createElement("div");
+    $(recietDiv).attr("id", "recietDiv");
+    $(recietDiv).css("background-color", "white");
+    $(recietDiv).css("width", "90%");
+    $(recietDiv).css("margin-top", "2rem");
+    $(recietDiv).css("margin-left", "5%");
+    $(recietDiv).innerText = "test test";
+
+    let recietContent = "";
+    
+
+    $("footer").append(recietDiv);
+    $("footer").click(() => {
+
+        if(!$("footer").hasClass("activated")) {
+            if(showReciet) {
+
+            } else {
+                recietContent = "";
+                for(let i = 0; i < tableOrders[currentTable]["item"].length; i++) {
+                    recietContent += "<p>" + tableOrders[currentTable]["item"][i] + " (" + tableOrders[currentTable]["price"][i] + ")</p>";
+                }
+                console.log(recietContent);
+            }
+            $(recietDiv).empty();
+            $(recietDiv).append(recietContent);
+        }
+        
+
+        
+
+        if($("footer").hasClass("activated")) {
+            for(let i = 0; i < 500; i++) {
+                $("footer").height("-=1");
+            }
+            $("footer").removeClass("activated"); 
+        }else {
+            for(let i = 0; i < 500; i++) {
+                $("footer").height("+=1");
+            } 
+            $("footer").addClass("activated");    
+        }
+        
+        
+    });
 });
 
 
@@ -18,17 +100,71 @@ function itemClicked(item) {
 
     let nameRef = document.createElement("h1");
     let picRef = document.createElement("img");
-    
+    let itemIngredientsList = document.createElement("ul");
+
+    let itemSource;
+    for(headers in menu) {
+        let intermidiate = menu[headers];
+        for(itm in intermidiate) {
+            if(intermidiate[itm]["name"] === item.getAttribute("name")) {
+                let itemSource = intermidiate[itm]["contents"];
+                for(i in itemSource) {
+                    let lstItm = document.createAttribute("li");
+                    $(lstItm).text(i);
+                    if(itemSource[i].substring(0,2) === "a:") {
+                        $(itemIngredientsList).append("<li>" + itemSource[i].replace("a:", "") + "</li>");
+                    }else {
+                        $(itemIngredientsList).append("<li>" + itemSource[i] + "</li>");
+                    }
+                    
+                }
+                
+                
+                
+            }
+        }
+    }
 
     nameRef.innerText = item.getAttribute("name");
     picRef.alt = "Bild på vald produkt";
     picRef.style["border"] = "1px solid black";
+    $(picRef).css("margin-top", "-2rem");
+    $(picRef).css("margin-left", "2rem");
+    nameRef.style["padding"] = "3rem";
+    $(nameRef).css("margin-top", "-1rem");
+    $(nameRef).css("margin-left", "-1rem");
+    
 
+    let externalItemLabel = document.createElement("p");
+    let externalItemInfo = document.createElement("textarea");
+    let sendBtn = document.createElement("button");
+
+    $(sendBtn).addClass("btn");
+    $(sendBtn).addClass("btn-primary")
+
+    $(externalItemLabel).css("padding", "1rem 3rem 0.1rem 2rem");
+    $(externalItemInfo).css("padding", "2rem 3rem 1rem 2rem");
+    $(externalItemInfo).css("margin-left", "2rem");
+    $(externalItemInfo).css("border", "2px solid black");
+    $(externalItemLabel).text("Övrig information:");
+
+    $(itemIngredientsList).css("margin-top", "-2rem");
+
+    $(sendBtn).css("width", "15rem");
+    $(sendBtn).css("margin-left", "2rem");
+    $(sendBtn).css("margin-top", "0.5rem");
+    $(sendBtn).text("Lägg till i order");
 
     $("aside").append(picRef);
     $("aside").append(nameRef);
+    $("aside").append(itemIngredientsList);
+    $("aside").append(externalItemLabel);
+    $("aside").append(externalItemInfo);
+    $("aside").append(sendBtn);
+    
 
     $("main").addClass("d-none");
+    $("footer").addClass("d-none");
     $("aside").removeClass("d-none");
 
     let returnBtn = document.createElement("button");
@@ -43,8 +179,24 @@ function itemClicked(item) {
     returnBtn.addEventListener("click", () => {
         $("aside").addClass("d-none");
         $("main").removeClass("d-none");
+        $("footer").removeClass("d-none");
         $(returnBtn).remove();
     });
+
+    sendBtn.addEventListener("click", () => {
+        if(externalItemInfo.value === "") {
+            console.log("no info");
+            tableOrders[currentTable]["item"].push(item.getAttribute("name"));
+        }else {
+            tableOrders[currentTable]["item"].push(item.getAttribute("name") + ": " + externalItemInfo.value);
+        }
+        tableOrders[currentTable]["price"].push(item.getAttribute("price"));
+
+        $("aside").addClass("d-none");
+        $("main").removeClass("d-none");
+        $("footer").removeClass("d-none");
+        $(returnBtn).remove();
+    })
 }
 
 function readMenu() {
@@ -71,6 +223,7 @@ function readMenu() {
             
             itemLink.classList.add("itm");
             itemLink.setAttribute("name", itemPath[item]["name"]);
+            itemLink.setAttribute("price", itemPath[item]["price"]);
             ingredientList.classList.add("ingList");
             itemLink.innerText = itemPath[item]["name"] + ' (' + itemPath[item]["price"] + ":-)";
 
@@ -98,6 +251,8 @@ function readMenu() {
             ingredientList.append(ingredientLink);
 
         }
+
+        $("main").append("<hr />")
     }
     
    
