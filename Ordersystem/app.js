@@ -109,7 +109,7 @@ $(document).ready(() => {
     $(changeBtn).css("height", "2rem");
     $(changeBtn).css("float", "left");
 
-    $(commitBtn).css("background-color", "cyan");
+    $(commitBtn).css("background-color", "chartreuse");
     $(commitBtn).css("margin-left", "14%");
     $(commitBtn).css("width", "9rem");
     $(commitBtn).css("height", "2rem");
@@ -146,14 +146,76 @@ $(document).ready(() => {
             $(recietDiv).append(recietContent);
         
     });
+
+    commitBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        commitBtn.disabled = true;
+        changeBtn.disabled = true;
+
+        let promt = document.createElement("h4");
+        $(promt).css("margin-left", "1rem");
+        if(showReciet) {
+            $(promt).text("Vill du skicka kvittot till kassan?");
+        }else {
+            $(promt).text("Vill du skicka ordern till köket?");  
+        }
+        $("footer").append(promt);
     
-    if(showReciet) {
-        $(changeBtn).text("Visa order");
-        $(commitBtn).text("skicka till kassa");
-    }else {
-        $(changeBtn).text("Visa kvitto");
-        $(commitBtn).text("skicka till kök");
-    }
+        let yesBtn = document.createElement("button");
+        let noBtn = document.createElement("button");
+
+        $(yesBtn).text("Ja");
+        $(noBtn).text("Nej");
+
+        $(yesBtn).css("float", "left");
+        $(yesBtn).css("background-color", "chartreuse");
+        $(yesBtn).css("margin-left", "5%");
+        $(yesBtn).css("width", "9rem");
+        $(yesBtn).css("height", "2rem");
+
+
+        $(noBtn).css("float", "left");
+        $(noBtn).css("background-color", "red");
+        $(noBtn).css("height", "2rem");
+        $(noBtn).css("width", "9rem");
+        $(noBtn).css("margin-left", "14%");
+
+        $("footer").append(yesBtn);
+        $("footer").append(noBtn);
+
+        yesBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            if(showReciet) {
+                console.log(tableCheck[currentTable]);
+            }else {
+                console.log(tableOrders[currentTable]);
+            }
+
+            commitBtn.disabled = false;
+            changeBtn.disabled = false;
+
+            $(promt).remove();
+            $(noBtn).remove();
+            $(yesBtn).remove();
+
+            
+        })
+
+        noBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+           
+            commitBtn.disabled = false;
+            changeBtn.disabled = false;
+
+            $(promt).remove();
+            $(noBtn).remove();
+            $(yesBtn).remove();
+        });
+
+        
+    });
+    
+    
 
     $("footer").append(changeBtn);
     $("footer").append(commitBtn);
