@@ -187,8 +187,44 @@ $(document).ready(() => {
             e.stopPropagation();
             if(showReciet) {
                 console.log(tableCheck[currentTable]);
+
+                tableCheck[currentTable]["item"] = [];
+                tableCheck[currentTable]["price"] = [];
+
+                if(showReciet) {
+                    recietContent = "";
+                    for(let i = 0; i < tableCheck[currentTable]["item"].length; i++) {
+                        recietContent += "<p>" + tableCheck[currentTable]["item"][i] + " (" + tableCheck[currentTable]["price"][i] + ")</p>";
+                    }
+                } else {
+                    recietContent = "";
+                    for(let i = 0; i < tableOrders[currentTable]["item"].length; i++) {
+                        recietContent += "<p>" + tableOrders[currentTable]["item"][i] + " (" + tableOrders[currentTable]["price"][i] + ")</p>";
+                    }
+                }
+                $(recietDiv).empty();
+                $(recietDiv).append(recietContent);
             }else {
-                console.log(tableOrders[currentTable]);
+                for(let i = 0; i < tableOrders[currentTable]["item"].length; i++) {
+                    tableCheck[currentTable]["item"].push(tableOrders[currentTable]["item"][i]);
+                    tableCheck[currentTable]["price"].push(tableOrders[currentTable]["price"][i]);
+                }
+                tableOrders[currentTable]["item"] = [];
+                tableOrders[currentTable]["price"] = []; 
+
+                if(showReciet) {
+                    recietContent = "";
+                    for(let i = 0; i < tableCheck[currentTable]["item"].length; i++) {
+                        recietContent += "<p>" + tableCheck[currentTable]["item"][i] + " (" + tableCheck[currentTable]["price"][i] + ")</p>";
+                    }
+                } else {
+                    recietContent = "";
+                    for(let i = 0; i < tableOrders[currentTable]["item"].length; i++) {
+                        recietContent += "<p>" + tableOrders[currentTable]["item"][i] + " (" + tableOrders[currentTable]["price"][i] + ")</p>";
+                    }
+                }
+                $(recietDiv).empty();
+                $(recietDiv).append(recietContent);
             }
 
             commitBtn.disabled = false;
