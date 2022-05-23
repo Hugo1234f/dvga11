@@ -32,12 +32,17 @@ let tableCheck = {
     "14" : {price: [], item: []},
     "15" : {price: [], item: []},
 }
-let currentTable = "1";
-let showReciet = true;
+
+let showReciet = false;
+let tableNums = [];
+let currentNavTable = 1;
+
 
 $(document).ready(() => {
     readMenu();
     $("aside").addClass("d-none");
+
+    
 
     let items = document.getElementsByClassName("itm");
     for(let i = 0; i < items.length; i++) {
@@ -48,6 +53,7 @@ $(document).ready(() => {
 
     //lisenserad från flaticon.com
     let tableIcon = document.createElement("img");
+    let tableIconSelected = false;
     $(tableIcon).attr("src", "./side-table.png");
     $(tableIcon).attr("alt", "bild på bord");
     $(tableIcon).css("float", "right");
@@ -56,8 +62,54 @@ $(document).ready(() => {
     $(tableIcon).css("margin-right", "0.5rem");
     $("nav").append(tableIcon);
 
+    for(let i = 0; i < 15; i++) {
+        
+    }
+
+    
+
     tableIcon.addEventListener("click", ()=> {
         console.log("change table clicked");
+
+        if(tableIconSelected) {
+            let tableNumsContent = document.getElementsByClassName("tableNum");
+
+            
+            $(".tableNum").remove();
+            
+            
+            $("nav").css("height", "3rem");
+            tableIconSelected = false;
+        }else {
+            $("nav").css("height", "5rem");
+            tableIconSelected = true;
+
+            
+
+            
+            for(let i = 1; i < 16; i++) {
+                tableNums[i] = document.createElement("p");
+                $(tableNums[i]).text(i);
+                $(tableNums[i]).css("display", "inline");
+                $(tableNums[i]).css("padding", "6px");
+                $(tableNums[i]).id = i;
+                $(tableNums[i]).addClass("tableNum");
+                if(i === currentNavTable) {
+                    $(tableNums[i]).addClass("numSelected");
+                }
+
+                tableNums[i].addEventListener("click", function() {
+                    $(tableNums[i]).addClass("numSelected");
+                    $(tableNums[currentNavTable]).removeClass("numSelected");
+                    currentNavTable = i;
+                });
+
+                $("nav").append(tableNums[i]);
+            }
+            
+            
+        }
+        
     });
 
     let recietDiv = document.createElement("div");
@@ -87,13 +139,13 @@ $(document).ready(() => {
         if(!$("footer").hasClass("activated")) {
             if(showReciet) {
                 recietContent = "";
-                for(let i = 0; i < tableCheck[currentTable]["item"].length; i++) {
-                    recietContent += "<p>" + tableCheck[currentTable]["item"][i] + " (" + tableCheck[currentTable]["price"][i] + ")</p>";
+                for(let i = 0; i < tableCheck[currentNavTable]["item"].length; i++) {
+                    recietContent += "<p>" + tableCheck[currentNavTable]["item"][i] + " (" + tableCheck[currentNavTable]["price"][i] + ")</p>";
                 }
             } else {
                 recietContent = "";
-                for(let i = 0; i < tableOrders[currentTable]["item"].length; i++) {
-                    recietContent += "<p>" + tableOrders[currentTable]["item"][i] + " (" + tableOrders[currentTable]["price"][i] + ")</p>";
+                for(let i = 0; i < tableOrders[currentNavTable]["item"].length; i++) {
+                    recietContent += "<p>" + tableOrders[currentNavTable]["item"][i] + " (" + tableOrders[currentNavTable]["price"][i] + ")</p>";
                 }
             }
             $(recietDiv).empty();
@@ -147,13 +199,13 @@ $(document).ready(() => {
         
             if(showReciet) {
                 recietContent = "";
-                for(let i = 0; i < tableCheck[currentTable]["item"].length; i++) {
-                    recietContent += "<p>" + tableCheck[currentTable]["item"][i] + " (" + tableCheck[currentTable]["price"][i] + ")</p>";
+                for(let i = 0; i < tableCheck[currentNavTable]["item"].length; i++) {
+                    recietContent += "<p>" + tableCheck[currentNavTable]["item"][i] + " (" + tableCheck[currentNavTable]["price"][i] + ")</p>";
                 }
             } else {
                 recietContent = "";
-                for(let i = 0; i < tableOrders[currentTable]["item"].length; i++) {
-                    recietContent += "<p>" + tableOrders[currentTable]["item"][i] + " (" + tableOrders[currentTable]["price"][i] + ")</p>";
+                for(let i = 0; i < tableOrders[currentNavTable]["item"].length; i++) {
+                    recietContent += "<p>" + tableOrders[currentNavTable]["item"][i] + " (" + tableOrders[currentNavTable]["price"][i] + ")</p>";
                 }
             }
             $(recietDiv).empty();
@@ -200,41 +252,41 @@ $(document).ready(() => {
         yesBtn.addEventListener("click", (e) => {
             e.stopPropagation();
             if(showReciet) {
-                console.log(tableCheck[currentTable]);
+                console.log(tableCheck[currentNavTable]);
 
-                tableCheck[currentTable]["item"] = [];
-                tableCheck[currentTable]["price"] = [];
+                tableCheck[currentNavTable]["item"] = [];
+                tableCheck[currentNavTable]["price"] = [];
 
                 if(showReciet) {
                     recietContent = "";
-                    for(let i = 0; i < tableCheck[currentTable]["item"].length; i++) {
-                        recietContent += "<p>" + tableCheck[currentTable]["item"][i] + " (" + tableCheck[currentTable]["price"][i] + ")</p>";
+                    for(let i = 0; i < tableCheck[currentNavTable]["item"].length; i++) {
+                        recietContent += "<p>" + tableCheck[currentNavTable]["item"][i] + " (" + tableCheck[currentNavTable]["price"][i] + ")</p>";
                     }
                 } else {
                     recietContent = "";
-                    for(let i = 0; i < tableOrders[currentTable]["item"].length; i++) {
-                        recietContent += "<p>" + tableOrders[currentTable]["item"][i] + " (" + tableOrders[currentTable]["price"][i] + ")</p>";
+                    for(let i = 0; i < tableOrders[currentNavTable]["item"].length; i++) {
+                        recietContent += "<p>" + tableOrders[currentNavTable]["item"][i] + " (" + tableOrders[currentNavTable]["price"][i] + ")</p>";
                     }
                 }
                 $(recietDiv).empty();
                 $(recietDiv).append(recietContent);
             }else {
-                for(let i = 0; i < tableOrders[currentTable]["item"].length; i++) {
-                    tableCheck[currentTable]["item"].push(tableOrders[currentTable]["item"][i]);
-                    tableCheck[currentTable]["price"].push(tableOrders[currentTable]["price"][i]);
+                for(let i = 0; i < tableOrders[currentNavTable]["item"].length; i++) {
+                    tableCheck[currentNavTable]["item"].push(tableOrders[currentNavTable]["item"][i]);
+                    tableCheck[currentNavTable]["price"].push(tableOrders[currentNavTable]["price"][i]);
                 }
-                tableOrders[currentTable]["item"] = [];
-                tableOrders[currentTable]["price"] = []; 
+                tableOrders[currentNavTable]["item"] = [];
+                tableOrders[currentNavTable]["price"] = []; 
 
                 if(showReciet) {
                     recietContent = "";
-                    for(let i = 0; i < tableCheck[currentTable]["item"].length; i++) {
-                        recietContent += "<p>" + tableCheck[currentTable]["item"][i] + " (" + tableCheck[currentTable]["price"][i] + ")</p>";
+                    for(let i = 0; i < tableCheck[currentNavTable]["item"].length; i++) {
+                        recietContent += "<p>" + tableCheck[currentNavTable]["item"][i] + " (" + tableCheck[currentNavTable]["price"][i] + ")</p>";
                     }
                 } else {
                     recietContent = "";
-                    for(let i = 0; i < tableOrders[currentTable]["item"].length; i++) {
-                        recietContent += "<p>" + tableOrders[currentTable]["item"][i] + " (" + tableOrders[currentTable]["price"][i] + ")</p>";
+                    for(let i = 0; i < tableOrders[currentNavTable]["item"].length; i++) {
+                        recietContent += "<p>" + tableOrders[currentNavTable]["item"][i] + " (" + tableOrders[currentNavTable]["price"][i] + ")</p>";
                     }
                 }
                 $(recietDiv).empty();
@@ -355,6 +407,8 @@ function itemClicked(item) {
 
     $("nav").append(returnBtn);
 
+    
+
     returnBtn.addEventListener("click", () => {
         $("aside").addClass("d-none");
         $("main").removeClass("d-none");
@@ -365,17 +419,17 @@ function itemClicked(item) {
     sendBtn.addEventListener("click", () => {
         if(externalItemInfo.value === "") {
             console.log("no info");
-            tableOrders[currentTable]["item"].push(item.getAttribute("name"));
+            tableOrders[currentNavTable]["item"].push(item.getAttribute("name"));
         }else {
-            tableOrders[currentTable]["item"].push(item.getAttribute("name") + ": " + externalItemInfo.value);
+            tableOrders[currentNavTable]["item"].push(item.getAttribute("name") + ": " + externalItemInfo.value);
         }
-        tableOrders[currentTable]["price"].push(item.getAttribute("price"));
+        tableOrders[currentNavTable]["price"].push(item.getAttribute("price"));
 
         $("aside").addClass("d-none");
         $("main").removeClass("d-none");
         $("footer").removeClass("d-none");
         $(returnBtn).remove();
-    })
+    });
 }
 
 function readMenu() {
